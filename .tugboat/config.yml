@@ -1,1 +1,15 @@
 
+services:
+  php:
+    image: tugboatqa/php:7-apache
+    default: true
+    depends: mysql
+    commands:
+      init:
+        - apt-get update
+        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
+      update:
+        - composer install --no-ansi
+ 
+    mysql:
+      image: tugboatqa/mysql:5
