@@ -1,3 +1,18 @@
+# Default
+.DS_Store
+.git
+
+# Node
+node_modules
+
+#Craft
+craft/config/license.key
+public/cpresources
+
+# Composer
+vendor/
+composer.lock
+
 # Craft Storage (cache) [http://buildwithcraft.com/help/craft-storage-gitignore]
 /craft/storage/*
 !/craft/storage/logo/*
