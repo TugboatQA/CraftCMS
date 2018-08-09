@@ -11,7 +11,7 @@ services:
         - apt-get install libzip-dev
         - pecl install zip
         - docker-php-ext-enable zip
-        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
+        - ln -snf "${TUGBOAT_ROOT}" "${DOCROOT}"
         - composer create-project craftcms/craft $DOCROOT
  
     mysql:
