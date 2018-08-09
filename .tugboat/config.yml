@@ -1,5 +1,5 @@
-
 services:
+
   php:
     image: tugboatqa/php:7-apache
     default: true
@@ -16,3 +16,4 @@ services:
  
     mysql:
       image: tugboatqa/mysql:5
+      
