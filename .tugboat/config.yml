@@ -9,7 +9,7 @@ services:
         - apt-get update
         - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
       update:
-        # - composer install --no-ansi
+        - composer create-project craftcms/craft $DOCROOT
  
     mysql:
       image: tugboatqa/mysql:5
