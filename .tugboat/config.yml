@@ -6,13 +6,13 @@ services:
     depends: mysql
     commands:
       init:
+        - set -x
         - apt-get update
         - apt-get install libzip-dev
         - pecl install zip
         - docker-php-ext-enable zip
         - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
-      update:
-        #- composer create-project craftcms/craft $DOCROOT
+        - composer create-project craftcms/craft $DOCROOT
  
     mysql:
       image: tugboatqa/mysql:5
