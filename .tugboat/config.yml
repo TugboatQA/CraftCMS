@@ -23,6 +23,8 @@ services:
         - chgrp -R www-data "${TUGBOAT_ROOT}/craft/storage/"
         - chmod -R 774 "${TUGBOAT_ROOT}/craft/config/"
         - chmod -R 774 "${TUGBOAT_ROOT}/craft/storage/"
+        - chgrp -R www-data "${DOCROOT}/cpresources"
+        - chmod -R 774 "${DOCROOT}/cpresources"
 
  
   mysql:
