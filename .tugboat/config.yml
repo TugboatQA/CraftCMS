@@ -11,9 +11,9 @@ services:
         - apt-get install -y libzip-dev mysql-client
         - pecl install zip
         - docker-php-ext-enable zip
-        #- mkdir "${TUGBOAT_ROOT}/www"
-        - composer create-project craftcms/craft $DOCROOT
-        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
+        - mkdir "${TUGBOAT_ROOT}/craft"
+        - composer create-project craftcms/craft "${TUGBOAT_ROOT}/craft"
+        - ln -snf "${TUGBOAT_ROOT}/craft/web" "${DOCROOT}"
       
       update:
         - ${DOCROOT}/craft setup/security-key
