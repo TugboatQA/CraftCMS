@@ -11,11 +11,11 @@ services:
         - apt-get install -y libzip-dev mysql-client
         - pecl install zip
         - docker-php-ext-enable zip
-        - mkdir "${TUGBOAT_ROOT}/www"
-        - ln -snf "${TUGBOAT_ROOT}/www/web" "${DOCROOT}"
+        #- mkdir "${TUGBOAT_ROOT}/www"
+        - composer create-project craftcms/craft $DOCROOT
+        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
       
       update:
-        - composer create-project craftcms/craft $DOCROOT
         - ${DOCROOT}/craft setup/security-key
         - ${DOCROOT}/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat --server=mysql
         - ${DOCROOT}/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}"
