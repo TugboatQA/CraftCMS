@@ -18,9 +18,8 @@ services:
         - composer create-project craftcms/craft $DOCROOT
  
   mysql:
-    image: tugboatqa/mysql:5.5
+    image: tugboatqa/mysql:5
     commands:
       init: 
       - set -x
-      - 'Running init within MySQL Service'
       
