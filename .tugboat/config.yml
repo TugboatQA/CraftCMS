@@ -11,10 +11,13 @@ services:
         - apt-get install libzip-dev
         - pecl install zip
         - docker-php-ext-enable zip
-        - mkdir "${TUGBOAT_ROOT}/www"
-        - ln -snf "${TUGBOAT_ROOT}/www" "${DOCROOT}"
+        - mkdir "${TUGBOAT_ROOT}/web"
+        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
         - composer create-project craftcms/craft $DOCROOT
  
     mysql:
       image: tugboatqa/mysql:5
+      commands:
+        init: 
+        - set -x
       
