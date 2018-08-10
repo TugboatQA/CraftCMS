@@ -19,7 +19,7 @@ services:
  
   mysql:
     image: tugboatqa/mysql:5
-      commands:
-        init: 
-        - set -x
+    commands:
+      init: 
+      - set -x
       
