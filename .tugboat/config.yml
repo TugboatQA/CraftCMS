@@ -13,10 +13,12 @@ services:
         - docker-php-ext-enable zip
         - mkdir "${TUGBOAT_ROOT}/web"
         - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
+      
+      update:
         - composer create-project craftcms/craft $DOCROOT
  
-    mysql:
-      image: tugboatqa/mysql:5
+  mysql:
+    image: tugboatqa/mysql:5
       commands:
         init: 
         - set -x
