@@ -12,7 +12,7 @@ services:
         - pecl install zip
         - docker-php-ext-enable zip
         - mkdir "${TUGBOAT_ROOT}/www"
-        - ln -snf "${TUGBOAT_ROOT}/www" "${DOCROOT}"
+        - ln -snf "${TUGBOAT_ROOT}/www/web" "${DOCROOT}"
       
       update:
         - composer create-project craftcms/craft $DOCROOT
