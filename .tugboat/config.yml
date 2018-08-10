@@ -18,7 +18,7 @@ services:
       update:
         - ${TUGBOAT_ROOT}/craft/craft setup/security-key
         - ${TUGBOAT_ROOT}/craft/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat --server=mysql
-        - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}"
+        - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}" --siteUrl="${TUGBOAT_DOMAIN}"
         - chgrp -R www-data "${TUGBOAT_ROOT}/craft/config/"
         - chgrp -R www-data "${TUGBOAT_ROOT}/craft/storage/"
         - chmod -R 774 "${TUGBOAT_ROOT}/craft/config/"
