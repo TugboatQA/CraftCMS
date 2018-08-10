@@ -21,8 +21,8 @@ services:
         - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}"
         - chgrp -R www-data "${TUGBOAT_ROOT}/craft/config/"
         - chgrp -R www-data "${TUGBOAT_ROOT}/craft/storage/"
-        - chmod 774 "${TUGBOAT_ROOT}/craft/config/"
-        - chmod 774 "${TUGBOAT_ROOT}/craft/storage/"
+        - chmod -R 774 "${TUGBOAT_ROOT}/craft/config/"
+        - chmod -R 774 "${TUGBOAT_ROOT}/craft/storage/"
 
  
   mysql:
