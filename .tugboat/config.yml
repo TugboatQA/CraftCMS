@@ -19,6 +19,11 @@ services:
         - ${TUGBOAT_ROOT}/craft/craft setup/security-key
         - ${TUGBOAT_ROOT}/craft/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat --server=mysql
         - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}"
+        - chgrp -R www-data "${TUGBOAT_ROOT}/craft/config/"
+        - chgrp -R www-data "${TUGBOAT_ROOT}/craft/storage/"
+        - chmod 774 "${TUGBOAT_ROOT}/craft/config/"
+        - chmod 774 "${TUGBOAT_ROOT}/craft/storage/"
+
  
   mysql:
     image: tugboatqa/mysql:5
