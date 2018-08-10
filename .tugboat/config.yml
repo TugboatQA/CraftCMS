@@ -16,8 +16,8 @@ services:
       
       update:
         - composer create-project craftcms/craft $DOCROOT
-        - $DOCROOT/craft setup/security-key
-        - $DOCROOT/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat
+        - ${DOCROOT}/craft setup/security-key
+        - ${DOCROOT}/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat
  
   mysql:
     image: tugboatqa/mysql:5
