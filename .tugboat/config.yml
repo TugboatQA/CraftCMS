@@ -12,6 +12,7 @@ services:
         - pecl install zip
         - docker-php-ext-enable zip
         - mkdir "${TUGBOAT_ROOT}/web"
+        - chgrp -R www-data "${TUGBOAT_ROOT}/web"
         - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
       
       update:
