@@ -58,8 +58,8 @@ services:
         - mkdir -p craft/vendor/ && touch craft/vendor/tugboat.txt
         - mkdir -p craft/web/cpresources/ && touch craft/web/cpresources/tugboat.txt
         - touch craft/.env craft/composer.json craft/composer.lock craft/config/license.key
-        - chown www-data craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
-        - chmod 744 -R craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
+        - chown -R www-data craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/ craft/vendor/ craft/web/cpresources/
+        - chmod 744 -R craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/ craft/vendor/ craft/web/cpresources/
         
       # Commands that build the site. When a preview is built from a
       # base preview, the build workflow starts here, skipping the init
