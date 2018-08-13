@@ -20,10 +20,12 @@ services:
         - ${TUGBOAT_ROOT}/craft/craft setup/security-key
         - ${TUGBOAT_ROOT}/craft/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat --server=mysql
         - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}" --siteUrl="${TUGBOAT_DOMAIN}"
+        - mkdir -p craft/storage/ && touch craft/storage/tugboat.txt
+        - mkdir -p craft/vendor/ && touch craft/vendor/tugboat.txt
+        - mkdir -p craft/web/cpresources/ && touch craft/web/cpresources/tugboat.txt
         - touch craft/.env craft/composer.json craft/composer.lock craft/config/license.key
         - chown -R www-data craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
         - chmod 744 -R craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
-
  
   mysql:
     image: tugboatqa/mysql:5
