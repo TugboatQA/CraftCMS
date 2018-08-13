@@ -26,6 +26,9 @@ services:
         - touch craft/.env craft/composer.json craft/composer.lock craft/config/license.key
         - chown www-data craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/ craft/vendor/ craft/web/cpresources/
         - chmod 744 -R craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
+        
+      build:
+        - ${TUGBOAT_ROOT}/craft/craft cache/flush-all
  
   mysql:
     image: tugboatqa/mysql:5
