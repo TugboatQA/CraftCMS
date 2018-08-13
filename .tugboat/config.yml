@@ -1,25 +1,61 @@
 services:
 
+  # What to call the service hosting the site.
   php:
+    
+    # Use the latest PHP 7.x with Apache
     image: tugboatqa/php:7-apache
+    
+    # Set this as the default service. This does a few things
+    #   1. Clones the git repository into the service container
+    #   2. Exposes port 80 to the Tugboat HTTP proxy
+    #   3. Routes requests to the preview URL to this service
     default: true
+    
+    # Wait until the mysql service is done building
     depends: mysql
+    
+    # A set of commands to run while building this service
     commands:
+      
+      # The `init` commands sets up the basic preview infrastructure
       init:
         - set -x
+        
+        # Install prerequisite packages
         - apt-get update
         - apt-get install -y libzip-dev mysql-client
         - pecl install zip
         - docker-php-ext-enable zip
         - a2enmod headers rewrite
+        
+        # Make a folder to install craft in. 
         - mkdir "${TUGBOAT_ROOT}/craft"
+        
+        # create a new Craft project.
         - composer create-project craftcms/craft "${TUGBOAT_ROOT}/craft"
+        
+        # Link the document root to the expected path. This example links /craft/web
+        # to the docroot
         - ln -snf "${TUGBOAT_ROOT}/craft/web" "${DOCROOT}"
       
+      # `Update` commands import files, databases,  or other assets. When an
+      # existing preview is refreshed, the build workflow starts here,
+      # skipping the init step, because the results of that step will
+      # already be present.
       update:
+        
+        # Setup the security key & initialize the database. 
         - ${TUGBOAT_ROOT}/craft/craft setup/security-key
         - ${TUGBOAT_ROOT}/craft/craft setup/db-creds --interactive=0 --database=tugboat --user=tugboat --password=tugboat --server=mysql
+        
+        # Install Craft. The variables ${CRAFT_EMAIL} and ${CRAFT_PWD}
+        # are environment variables coming from Tugboat on the Repository
+        # Settings page. You must set these up ahead of time. See the 
+        # screenshot in this repos to know what it looks like. 
         - ${TUGBOAT_ROOT}/craft/craft install --interactive=0 --email="${CRAFT_EMAIL}" --username=tugboat --password=${CRAFT_PWD} --siteName="${TUGBOAT_PROJECT}" --siteUrl="${TUGBOAT_DOMAIN}"
+        
+        # Setup all the necessary permissions for Craft.
         - mkdir -p craft/storage/ && touch craft/storage/tugboat.txt
         - mkdir -p craft/vendor/ && touch craft/vendor/tugboat.txt
         - mkdir -p craft/web/cpresources/ && touch craft/web/cpresources/tugboat.txt
@@ -27,12 +63,17 @@ services:
         - chown www-data craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/ craft/vendor/ craft/web/cpresources/
         - chmod 744 -R craft/.env craft/composer.json craft/composer.lock craft/config/license.key craft/storage/* craft/vendor/* craft/web/cpresources/*
         
+      # Commands that build the site. When a preview is built from a
+      # base preview, the build workflow starts here, skipping the init
+      # and update steps, because the results of those are inherited
+      # from the base preview.
       build:
+        # Clear the Craft cache. 
         - ${TUGBOAT_ROOT}/craft/craft cache/flush-all
  
+  # What to call the service hosting MySQL. This name also acts as the
+  # hostname to access the service by from the php service.
   mysql:
-    image: tugboatqa/mysql:5
-    commands:
-      init: 
-      - set -x
-      
+    
+    # Use the latest available 5.x version of MySQL
+    image: tugboatqa/mysql:5      
