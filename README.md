@@ -2,7 +2,7 @@
 
 This is a [configuration file](https://github.com/TugboatQA/craftcms/blob/master/.tugboat/config.yml) for spinning up a new Craft 3 site in Tugboat. It uses Composer to download the latest version of Craft 3 and spin up a clean LAMP stack. 
 
-Tugboat is free to use. It comes in handy to automatically build out a fully working version of the site for every pull request, branch or tag. 
+Tugboat is free to use. It comes in handy to automatically build out a fully working version of the site for every pull request, branch or tag. The full tutorial is [over here](https://tugboat.qa/2018/08/14/Free-Continuous-Integration-for-Craft-3). 
 
 ## Installation
 
